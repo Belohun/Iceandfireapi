@@ -1,8 +1,10 @@
 package com.example.iceandfireapi.data.network.response
 
 
+import androidx.room.Entity
 import com.google.gson.annotations.SerializedName
 
+@Entity(tableName = "characters")
 data class IceAndFireResponse(
     @SerializedName("aliases")
     val aliases: List<String>,
