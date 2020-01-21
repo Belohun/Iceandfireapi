@@ -3,6 +3,7 @@ package com.example.iceandfireapi.data.network.response
 
 import androidx.room.Entity
 import androidx.room.Ignore
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "characters")
@@ -28,6 +29,7 @@ data class IceAndFireResponse(
     val gender: String,
     @SerializedName("mother")
     val mother: String,
+    @PrimaryKey
     @SerializedName("name")
     val name: String,
     @SerializedName("playedBy")
