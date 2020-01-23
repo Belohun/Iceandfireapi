@@ -9,8 +9,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.example.iceandfireapi.Database.DataModel
-import com.example.iceandfireapi.Database.DbCreator
+import com.example.iceandfireapi.Database.*
 import com.example.shopapi.R
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
@@ -35,19 +34,15 @@ class MainActivity : AppCompatActivity() {
 
 
         val db = DbCreator.CharactersDB.getInstance(this)
-        val c1 = DataModel("lewo, prawo", "góra, dół"," pierwsza i ostatnia", "nigdy", "nie posiada", "nie", "ojciec", "apache", "jedna", "Przykładowe Imię Dwa", "kiepski aktor", "df", "nie", "imperium kontratakuje", "pierwsza i środkowa","www.google.com")
+        val c2 = DataModel("kappa", "góra, dół"," pierwsza i ostatnia", "nigdy", "nie posiada", "nie", "ojciec", "apache", "jedna", "Przykładowe Imię Trzy", "kiepski aktor", "df", "nie", "imperium kontratakuje", "pierwsza i środkowa","www.google.com")
        // db.characterDao().ins(c1)
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-        addChar(db, c1)
+        //addChar(db, c2)
+        getAll(db)
 
     }
 
-    fun addChar(db: DbCreator.CharactersDB, c: DataModel) {
-        CoroutineScope(Dispatchers.IO).launch {
-            db.characterDao().ins(c)
-            d("all chars", "${db.characterDao().getAllCharacters()}")
-        }
-    }
+
 }
