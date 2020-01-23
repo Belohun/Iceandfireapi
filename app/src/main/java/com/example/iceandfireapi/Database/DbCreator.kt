@@ -9,13 +9,12 @@ import androidx.room.RoomDatabase
 private const val DATABASE = "favourite_characters"
 class DbCreator {
 
-
     @Database(
         entities = [DataModel::class],
         version = 1,
         exportSchema = false
     )
-    abstract class SlupOgloszeniowyDB: RoomDatabase(){
+    abstract class CharactersDB: RoomDatabase(){
         abstract fun characterDao(): ICharacter
 
 
@@ -24,17 +23,17 @@ class DbCreator {
 
 
             @Volatile
-            private var instance: SlupOgloszeniowyDB? = null
+            private var instance: CharactersDB? = null
 
-            fun getInstance(context: Context): SlupOgloszeniowyDB {
+            fun getInstance(context: Context): CharactersDB {
                 return instance ?: synchronized(this) {
                     instance
                         ?: buildDatabase(context).also { instance = it }
                 }
             }
 
-            private fun buildDatabase(context: Context): SlupOgloszeniowyDB {
-                return Room.databaseBuilder(context, SlupOgloszeniowyDB::class.java, DATABASE)
+            private fun buildDatabase(context: Context): CharactersDB {
+                return Room.databaseBuilder(context, CharactersDB::class.java, DATABASE)
                     .fallbackToDestructiveMigration().build()
             }
         }
