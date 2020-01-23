@@ -26,16 +26,41 @@ interface ICharacter {
 
 }
 
-fun addChar(db: DbCreator.CharactersDB, c: DataModel) {
+fun addChar(db: DbCreator.CharactersDB, c: DataModel) { // Insert
     CoroutineScope(Dispatchers.IO).launch {
         db.characterDao().ins(c)
     }
 }
 
-fun getAll(db: DbCreator.CharactersDB){
+fun delete(db: DbCreator.CharactersDB, c:DataModel) {
     CoroutineScope(Dispatchers.IO).launch {
-        val lista = db.characterDao().getAllCharacters()
-        lista.forEach { with(Dispatchers.Main){Log.d("all chars", "${it.name}")} }
-
+        db.characterDao().del(c)
+        Log.d("all chars", "Usunięto ${c.name}")
     }
 }
+
+fun getAll(db: DbCreator.CharactersDB) { // Select All
+    CoroutineScope(Dispatchers.IO).launch {
+        val lista: List<DataModel> = db.characterDao().getAllCharacters()
+        lista.forEach {
+            with(Dispatchers.Main) {Log.d("all chars", "${it.name}")}
+        }
+    }
+}
+
+fun getByName(db: DbCreator.CharactersDB, n: String) {
+    CoroutineScope(Dispatchers.IO).launch {
+        val c: DataModel = db.characterDao().getCharacterByName(n)
+        with(Dispatchers.Main) {Log.d("got by name: ", "$c")}
+    }
+}
+
+fun getByActor(db:DbCreator.CharactersDB, a:String){
+    CoroutineScope(Dispatchers.IO).launch {
+        val c = db.characterDao().getCharacterByActor(a)
+        with(Dispatchers.Main) {Log.d("got by actor:", "$c")}
+    }
+}
+
+//TODO:
+//  podłączyć funkcje do recycler view

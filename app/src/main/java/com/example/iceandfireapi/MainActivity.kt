@@ -35,12 +35,18 @@ class MainActivity : AppCompatActivity() {
 
         val db = DbCreator.CharactersDB.getInstance(this)
         val c2 = DataModel("kappa", "góra, dół"," pierwsza i ostatnia", "nigdy", "nie posiada", "nie", "ojciec", "apache", "jedna", "Przykładowe Imię Trzy", "kiepski aktor", "df", "nie", "imperium kontratakuje", "pierwsza i środkowa","www.google.com")
-       // db.characterDao().ins(c1)
+        //runBlocking{db.characterDao().ins(c2)}
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
         //addChar(db, c2)
         getAll(db)
+        getByName(db, "Przykładowe Imię Dwa")
+        getByActor(db, "kiepski")
+        runBlocking { delay(1000)}
+        //delete(db, c2)
+        runBlocking { delay(1000)}
+        //getAll(db)
 
     }
 
