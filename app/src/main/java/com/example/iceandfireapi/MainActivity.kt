@@ -7,13 +7,16 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+
 import com.example.shopapi.R
 
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_main)
+      /*  refreashdata(this)*/
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
 
         val navController = findNavController(R.id.nav_host_fragment)
@@ -28,4 +31,12 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }
+/*    fun refreashdata(context: Context){
+        val IceAndFireList = IceAndFireData().List
+
+            recyclerView.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+            val adapter = ResponseAdapter(context, IceAndFireList)
+            recyclerView.adapter = adapter
+    }*/
 }
+
