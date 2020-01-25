@@ -51,8 +51,8 @@ class HomeFragment : Fragment() {
 
         val context: Context
         context = this.context!!
-        var page: Int = 1
-        var pageSize: Int = 20
+        var page: Int = 2
+        var pageSize: Int = 10
 
         GlobalScope.launch(Dispatchers.Main) {
             try {
@@ -67,7 +67,7 @@ class HomeFragment : Fragment() {
                         Toast.makeText(context, "Error while trying to get data", Toast.LENGTH_LONG).show()
                     }else{
                         recyclerView.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-                        val adapter = ResponseAdapter(context,IceAndFireResponse )
+                        val adapter = ResponseAdapter(context,IceAndFireResponse,page,pageSize )
                         recyclerView.adapter = adapter
                     }
 
