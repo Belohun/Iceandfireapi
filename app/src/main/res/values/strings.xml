@@ -3,7 +3,7 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
-    <string-array name="pages">
+    <string-array name="page">
         <item>1</item>
         <item>2</item>
         <item>3</item>
@@ -14,6 +14,14 @@
         <item>8</item>
         <item>9</item>
         <item>10</item>
+
+    </string-array>
+    <string-array name="pageSize">
+        <item>10</item>
+        <item>20</item>
+        <item>30</item>
+        <item>40</item>
+        <item>50</item>
 
     </string-array>
 </resources>

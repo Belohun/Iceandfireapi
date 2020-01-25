@@ -10,7 +10,7 @@
         layout="@layout/character" />-->
     <LinearLayout
 
-        android:id="@+id/test"
+        android:id="@+id/spinners"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -19,37 +19,45 @@
         app:layout_constraintTop_toTopOf="parent"
         android:background="?android:attr/windowBackground"
         android:paddingBottom="10dp"
+        android:alpha="1"
         >
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="Page"
+            android:gravity="center"
             android:textColor="@color/cardview_dark_background"
             android:textSize="18dp"
-            android:layout_weight="2"/>
+            android:layout_weight="3"/>
         <Spinner
-
+            android:id="@+id/page"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="1"/>
+            android:layout_weight="2"/>
 
         />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:gravity="center"
             android:text="Size"
             android:textColor="@color/cardview_dark_background"
             android:textSize="18dp"
-            android:layout_weight="2"/>/>
+            android:layout_weight="3"/>/>
         <Spinner
-
+            android:id="@+id/pageSize"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_gravity="right"
-            android:layout_weight="1"/>
+            android:layout_weight="2"/>
+
+        <Button
+            android:id="@+id/changepageBtn"
+            android:layout_width="@android:dimen/app_icon_size"
+            android:layout_height="@android:dimen/app_icon_size"
+            android:layout_weight="0.1"
+            android:background="@drawable/ic_arrow_forward_black_24dp" />
 
 
-        />
 
     </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView
@@ -57,5 +65,5 @@
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/test"></androidx.recyclerview.widget.RecyclerView>
+        app:layout_constraintTop_toBottomOf="@id/spinners"></androidx.recyclerview.widget.RecyclerView>
 </androidx.constraintlayout.widget.ConstraintLayout>
