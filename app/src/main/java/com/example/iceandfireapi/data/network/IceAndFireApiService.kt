@@ -39,8 +39,8 @@ val requestInterceptor = Interceptor{chain ->
              .build()
          return Retrofit.Builder()
              .client(okHttpClient)
-             /*.baseUrl("https://www.anapioficeandfire.com/api/")*/
-             .baseUrl("http://192.168.8.158:69/iceandfireapi/")
+             //.baseUrl("https://www.anapioficeandfire.com/api/")
+             .baseUrl("http://192.168.1.201:80/iceandfireapi/")
 
              .addCallAdapterFactory(CoroutineCallAdapterFactory())
              .addConverterFactory(GsonConverterFactory.create())
