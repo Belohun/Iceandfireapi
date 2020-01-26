@@ -35,7 +35,7 @@
             android:layout_height="match_parent"
             android:layout_weight="2"/>
 
-        />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -43,7 +43,7 @@
             android:text="Size"
             android:textColor="@color/cardview_dark_background"
             android:textSize="18dp"
-            android:layout_weight="3"/>/>
+            android:layout_weight="3"/>
         <Spinner
             android:id="@+id/pageSize"
             android:layout_width="wrap_content"
