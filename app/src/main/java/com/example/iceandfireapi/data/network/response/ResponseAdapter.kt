@@ -1,22 +1,17 @@
 package com.example.iceandfireapi.data.network.response
 
-import android.app.Application
 import android.content.Context
-import android.content.Intent
 import android.util.Log.d
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.example.iceandfireapi.Database.DbCreator
 import com.example.iceandfireapi.Database.addChar
-import com.example.iceandfireapi.data.network.IceAndFireApiService.Companion.invoke
 import com.example.shopapi.R
 import kotlinx.android.synthetic.main.character.view.*
-import kotlinx.coroutines.GlobalScope
 import java.io.IOException
 
 class ResponseAdapter(context: Context, var IceAndFireList: ArrayList<IceAndFireResponse>, var page:Int,var pageSize: Int): RecyclerView.Adapter<ResponseAdapter.ViewHolder>(){
@@ -36,23 +31,18 @@ class ResponseAdapter(context: Context, var IceAndFireList: ArrayList<IceAndFire
     }
 
     override fun getItemCount(): Int {
-        /*d("Ilość postaci",IceAndFireList.size.toString())*/
         return pageSize
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        try {
-
 
             var charactes: IceAndFireResponse = IceAndFireList[position+((pageSize)*(page-1))]
 
             if (charactes.name == "") {
                 holder.name.text = charactes.aliases[0]
-                /*          holder.name.text=charactes.aliases[0]*/
             } else {
                 holder.name.text = charactes.name
             }
-            /*holder.button.setBackgroundResource(R.drawable.ic_add_circle_white_24dp)*/
             holder.button.text = "Add"
             holder.button.setOnClickListener {
                 d("TODO","Tutaj wstaw funkcję odpowiadającą za dodawanie do bazy")
@@ -60,16 +50,12 @@ class ResponseAdapter(context: Context, var IceAndFireList: ArrayList<IceAndFire
                 addChar(db, charactes)
             }
             holder.itemView.setOnClickListener {
-
+                CharacterViewModel()._character.value=IceAndFireList[position]
 
                 navController!!.navigate(R.id.action_navigation_home_to_nav_fragment_character)
 
-
             }
-        }catch (e: IOException){
-            holder.name.text="Error"
-            d("Adapter","onBindViewHolder")
-        }
+
     }
 
 }

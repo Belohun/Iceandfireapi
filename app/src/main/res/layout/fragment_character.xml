@@ -1,183 +1,202 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/fragment_character">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        >
-        <TextView
-            android:layout_width="match_parent"
-            android:textColor="@color/cardview_dark_background"
-            android:textSize="25dp"
-            android:layout_height="match_parent"
-            android:hint="Title"
-            android:gravity="center"
-            android:layout_weight="1"
-            />
-        <Button
-            android:id="@+id/TitleFragment_character"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text=""
-            android:gravity="center"
-            android:layout_weight="3"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        >
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:textColor="@color/cardview_dark_background"
-            android:textSize="20dp"
-            android:layout_height="match_parent"
-            android:text="Name:"
-            android:layout_weight="3"
-            />
-        <TextView
-            android:id="@+id/nameFragment_character"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="No info"
-            android:text=""
-            android:gravity="center"
-            android:layout_weight="1"/>
-    </LinearLayout>
+    <data>
+        <variable
+            name="character"
+            type="com.example.iceandfireapi.data.network.response.IceAndFireResponse" />
+    </data>
+
     <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        >
-        <TextView
+        android:layout_height="match_parent"
+        android:id="@+id/fragment_character"
+        android:tag="Fragment_Character">
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:textColor="@color/cardview_dark_background"
-            android:textSize="20dp"
-            android:layout_height="match_parent"
-            android:text="Alias:"
-            android:layout_weight="3"
-            />
-        <TextView
-            android:id="@+id/aliasFragment_character"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:textColor="@color/cardview_dark_background"
+                android:textSize="25dp"
+                android:text="@{character.name}"
+                android:layout_height="match_parent"
+                android:hint="Title"
+                android:gravity="center"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/TitleFragment_character"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text=""
+                android:gravity="center"
+                android:layout_weight="3" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="No info"
-            android:text=""
-            android:gravity="center"
-            android:layout_weight="1"/>
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:textColor="@color/cardview_dark_background"
+                android:textSize="20dp"
+                android:layout_height="match_parent"
+                android:text="Name:"
+                android:layout_weight="3" />
+
+            <TextView
+                android:id="@+id/nameFragment_character"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="No info"
+                android:text="@{character.name}"
+                android:gravity="center"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:textColor="@color/cardview_dark_background"
+                android:textSize="20dp"
+                android:layout_height="match_parent"
+                android:text="Alias:"
+                android:layout_weight="3" />
+
+            <TextView
+                android:id="@+id/aliasFragment_character"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="No info"
+                android:text=""
+                android:gravity="center"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:textColor="@color/cardview_dark_background"
+                android:textSize="20dp"
+                android:layout_height="match_parent"
+                android:text="Gender:"
+                android:layout_weight="3" />
+
+            <TextView
+                android:id="@+id/genderFragment_character"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="No info"
+                android:text=""
+                android:gravity="center"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:textColor="@color/cardview_dark_background"
+                android:textSize="20dp"
+                android:layout_height="match_parent"
+                android:text="Born:"
+                android:layout_weight="3" />
+
+            <TextView
+                android:id="@+id/bornFragment_character"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="No info"
+                android:text=""
+                android:gravity="center"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:textColor="@color/cardview_dark_background"
+                android:textSize="20dp"
+                android:layout_height="match_parent"
+                android:text="Died:"
+                android:layout_weight="3" />
+
+            <TextView
+                android:id="@+id/diedFragment_character"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="No info"
+                android:text=""
+                android:gravity="center"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:textColor="@color/cardview_dark_background"
+                android:textSize="20dp"
+                android:layout_height="match_parent"
+                android:text="Father:"
+                android:layout_weight="3" />
+
+            <TextView
+                android:id="@+id/fatherFragment_character"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="No info"
+                android:text=""
+                android:gravity="center"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:textColor="@color/cardview_dark_background"
+                android:textSize="20dp"
+                android:layout_height="match_parent"
+                android:text="Mother:"
+                android:layout_weight="3" />
+
+            <TextView
+                android:id="@+id/motherFragment_character"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="No info"
+                android:text=""
+                android:gravity="center"
+                android:layout_weight="1" />
+        </LinearLayout>
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        >
-        <TextView
-            android:layout_width="match_parent"
-            android:textColor="@color/cardview_dark_background"
-            android:textSize="20dp"
-            android:layout_height="match_parent"
-            android:text="Gender:"
-            android:layout_weight="3"
-            />
-        <TextView
-            android:id="@+id/genderFragment_character"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="No info"
-            android:text=""
-            android:gravity="center"
-            android:layout_weight="1"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        >
-        <TextView
-            android:layout_width="match_parent"
-            android:textColor="@color/cardview_dark_background"
-            android:textSize="20dp"
-            android:layout_height="match_parent"
-            android:text="Born:"
-            android:layout_weight="3"
-            />
-        <TextView
-            android:id="@+id/bornFragment_character"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="No info"
-            android:text=""
-            android:gravity="center"
-            android:layout_weight="1"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        >
-        <TextView
-            android:layout_width="match_parent"
-            android:textColor="@color/cardview_dark_background"
-            android:textSize="20dp"
-            android:layout_height="match_parent"
-            android:text="Died:"
-            android:layout_weight="3"
-            />
-        <TextView
-            android:id="@+id/diedFragment_character"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="No info"
-            android:text=""
-            android:gravity="center"
-            android:layout_weight="1"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        >
-        <TextView
-            android:layout_width="match_parent"
-            android:textColor="@color/cardview_dark_background"
-            android:textSize="20dp"
-            android:layout_height="match_parent"
-            android:text="Father:"
-            android:layout_weight="3"
-            />
-        <TextView
-            android:id="@+id/fatherFragment_character"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="No info"
-            android:text=""
-            android:gravity="center"
-            android:layout_weight="1"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        >
-        <TextView
-            android:layout_width="match_parent"
-            android:textColor="@color/cardview_dark_background"
-            android:textSize="20dp"
-            android:layout_height="match_parent"
-            android:text="Mother:"
-            android:layout_weight="3"
-            />
-        <TextView
-            android:id="@+id/motherFragment_character"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="No info"
-            android:text=""
-            android:gravity="center"
-            android:layout_weight="1"/>
-    </LinearLayout>
-</LinearLayout>
+</layout>
