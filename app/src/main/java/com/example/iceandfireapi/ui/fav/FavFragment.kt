@@ -14,11 +14,16 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.iceandfireapi.Database.DbCreator
+import com.example.iceandfireapi.Database.getAll
+import com.example.iceandfireapi.Database.getChars
 import com.example.iceandfireapi.data.network.IceAndFireApiService
 import com.example.iceandfireapi.data.network.response.FavAdapter
+import com.example.iceandfireapi.data.network.response.IceAndFireResponse
 import com.example.iceandfireapi.data.network.response.ResponseAdapter
 import com.example.iceandfireapi.ui.home.HomeViewModel
 import com.example.shopapi.R
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -28,18 +33,18 @@ class FavFragment : Fragment() {
 
     private lateinit var favViewModel: FavViewModel
     private var navController: NavController?=null
-    override fun onCreateView(
 
+    override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
+
     ): View? {
-        val context: Context
-        context = this.context!!
+        val context: Context?
+
         navController= Navigation.findNavController(container!!)
 
-
-
+        context = getContext()
 
         favViewModel =
             ViewModelProviders.of(this).get(FavViewModel::class.java)
@@ -55,34 +60,14 @@ class FavFragment : Fragment() {
          homeViewModel.button.observe(this, Observer {
             button.text=it
          })*/
-        GlobalScope.launch(Dispatchers.Main) {
-            try {
 
-                val apiServive =
-                    IceAndFireApiService()
-                GlobalScope.launch(Dispatchers.Main) {
-                    val IceAndFireResponse = apiServive.getCharacter(/*page.toString(),pageSize.toString()*/).await()
-                    Log.d("APIRESPONSE", IceAndFireResponse[1].toString())
 
-                    if(IceAndFireResponse[0]== null){
-                        Toast.makeText(context, "Error while trying to get data", Toast.LENGTH_LONG).show()
-                    }else{
-                        recyclerView.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-                        val adapter = FavAdapter(context,IceAndFireResponse)
-                        recyclerView.adapter = adapter
-                    }
+               recyclerView.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+        val db = DbCreator.CharactersDB.getInstance(context!!)
+                val adapter = FavAdapter(context, getChars(db))
 
-                }
 
-                /*fragment.recyclerView.layoutManager = LinearLayoutManager(application, RecyclerView.VERTICAL, false)
-                val adapter = ResponseAdapter(application, IceAndFireResponse)
-                fragment.recyclerView.adapter = adapter*/
-
-            } catch (e: IOException) {
-                /* d("Internet","Error while tring to reach api")*/
-                Toast.makeText(context, "Error while trying to get data", Toast.LENGTH_LONG).show()
-            }
-        }
+        //}
 
 
         return root
@@ -90,5 +75,6 @@ class FavFragment : Fragment() {
 
 
     }
+
 }
 

@@ -14,7 +14,7 @@ import com.example.shopapi.R
 import kotlinx.android.synthetic.main.character.view.*
 import java.io.IOException
 
-class FavAdapter(context: Context, var IceAndFireList: ArrayList<IceAndFireResponse>): RecyclerView.Adapter<FavAdapter.ViewHolder>(){
+class FavAdapter(context: Context, var IceAndFireList: List<IceAndFireResponse>): RecyclerView.Adapter<FavAdapter.ViewHolder>(){
     val context = context
     var navController: NavController?=null
     class ViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){

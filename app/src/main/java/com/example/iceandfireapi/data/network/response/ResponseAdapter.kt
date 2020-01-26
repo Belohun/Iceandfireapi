@@ -1,5 +1,6 @@
 package com.example.iceandfireapi.data.network.response
 
+import android.app.Application
 import android.content.Context
 import android.content.Intent
 import android.util.Log.d
@@ -10,8 +11,12 @@ import android.widget.Toast
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
+import com.example.iceandfireapi.Database.DbCreator
+import com.example.iceandfireapi.Database.addChar
+import com.example.iceandfireapi.data.network.IceAndFireApiService.Companion.invoke
 import com.example.shopapi.R
 import kotlinx.android.synthetic.main.character.view.*
+import kotlinx.coroutines.GlobalScope
 import java.io.IOException
 
 class ResponseAdapter(context: Context, var IceAndFireList: ArrayList<IceAndFireResponse>, var page:Int,var pageSize: Int): RecyclerView.Adapter<ResponseAdapter.ViewHolder>(){
@@ -20,6 +25,7 @@ class ResponseAdapter(context: Context, var IceAndFireList: ArrayList<IceAndFire
   class ViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
     var name = itemView.name
     val button = itemView.btn_char
+
   }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -49,6 +55,8 @@ class ResponseAdapter(context: Context, var IceAndFireList: ArrayList<IceAndFire
             holder.button.text = "Add"
             holder.button.setOnClickListener {
                 d("TODO","Tutaj wstaw funkcję odpowiadającą za dodawanie do bazy")
+                val db = DbCreator.CharactersDB.getInstance(context)
+                addChar(db, charactes)
             }
             holder.itemView.setOnClickListener {
 

@@ -6,9 +6,8 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import com.example.iceandfireapi.data.network.response.IceAndFireResponse
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import com.example.iceandfireapi.data.network.response.ResponseAdapter
+import kotlinx.coroutines.*
 
 @Dao
 interface ICharacter {
@@ -38,13 +37,13 @@ fun delete(db: DbCreator.CharactersDB, c:IceAndFireResponse) {
     }
 }
 
-fun getAll(db: DbCreator.CharactersDB) { // Select All
-    CoroutineScope(Dispatchers.IO).launch {
-        val lista: List<IceAndFireResponse> = db.characterDao().getAllCharacters()
-        lista.forEach {
-            with(Dispatchers.Main) {Log.d("all chars", "${it.name}")}
-        }
-    }
+suspend fun getAll(db: DbCreator.CharactersDB) = withContext(Dispatchers.IO) {
+    db.characterDao().getAllCharacters() as ArrayList<IceAndFireResponse>
+}
+
+fun getChars(db: DbCreator.CharactersDB): ArrayList<IceAndFireResponse> = runBlocking(Dispatchers.Default) {
+    val result = async {db.characterDao().getAllCharacters()}.await()
+    return@runBlocking result as ArrayList<IceAndFireResponse>
 }
 
 fun getByName(db: DbCreator.CharactersDB, n: String) {
