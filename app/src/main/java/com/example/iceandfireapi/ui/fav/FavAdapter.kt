@@ -47,12 +47,12 @@ class FavAdapter(context: Context, var IceAndFireList: ArrayList<IceAndFireRespo
             /*holder.button.setBackgroundResource(R.drawable.ic_add_circle_white_24dp)*/
             holder.button.text = "Del"
             holder.button.setOnClickListener {
-                TODO("Tutaj wstaw funkcję odpowiadającą za usuwanie z bazy")
+                d("todo","Tutaj wstaw funkcję odpowiadającą za usuwanie z bazy")
             }
             holder.itemView.setOnClickListener {
 
+                d("todo", "Tutaj wstaw funkcję odpowiadającą za wyświetlanie postaci bazy")
 
-                navController!!.navigate(R.id.action_navigation_home_to_nav_fragment_character)
 
 
             }
