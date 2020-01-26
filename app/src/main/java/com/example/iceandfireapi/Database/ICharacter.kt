@@ -1,25 +1,33 @@
 package com.example.iceandfireapi.Database
 
 import android.util.Log
+import android.util.Log.d
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import com.example.iceandfireapi.data.network.response.IceAndFireResponse
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import com.example.iceandfireapi.data.network.response.ResponseAdapter
+import kotlinx.coroutines.*
 
 @Dao
 interface ICharacter {
+
     @Insert
     suspend fun ins(c: IceAndFireResponse)
+
     @Delete
     suspend fun del(c: IceAndFireResponse)
+
     @Query("Select * from favourite_characters")
     suspend fun getAllCharacters(): List<IceAndFireResponse>
+
     @Query("Select * from favourite_characters where name==:name")
     suspend fun getCharacterByName(name: String): IceAndFireResponse
+
+    @Query("Select * from favourite_characters where id==:id")
+    suspend fun getCharacterById(id: Int): IceAndFireResponse
+
     @Query("Select * from favourite_characters where played_by like '%' || :actor || '%'")
     suspend fun getCharacterByActor(actor: String): IceAndFireResponse
 
@@ -27,7 +35,7 @@ interface ICharacter {
 
 fun addChar(db: DbCreator.CharactersDB, c: IceAndFireResponse) { // Insert
     CoroutineScope(Dispatchers.IO).launch {
-        db.characterDao().ins(c)
+        if("${getById(db, c.id)}"=="null") db.characterDao().ins(c)
     }
 }
 
@@ -38,13 +46,14 @@ fun delete(db: DbCreator.CharactersDB, c:IceAndFireResponse) {
     }
 }
 
-fun getAll(db: DbCreator.CharactersDB) { // Select All
-    CoroutineScope(Dispatchers.IO).launch {
-        val lista: List<IceAndFireResponse> = db.characterDao().getAllCharacters()
-        lista.forEach {
-            with(Dispatchers.Main) {Log.d("all chars", "${it.name}")}
-        }
-    }
+fun getById(db: DbCreator.CharactersDB, id: Int):IceAndFireResponse = runBlocking(Dispatchers.IO) {
+    val result = async {db.characterDao().getCharacterById(id)}.await()
+    return@runBlocking result
+}
+
+fun getChars(db: DbCreator.CharactersDB): ArrayList<IceAndFireResponse> = runBlocking(Dispatchers.Default) {
+    val result = async {db.characterDao().getAllCharacters()}.await()
+    return@runBlocking result as ArrayList<IceAndFireResponse>
 }
 
 fun getByName(db: DbCreator.CharactersDB, n: String) {

@@ -25,7 +25,12 @@
         android:id="@+id/navigation_fav"
         android:name="com.example.iceandfireapi.ui.fav.FavFragment"
         android:label="Favorite"
-        tools:layout="@layout/fragment_fav" />
+        tools:layout="@layout/fragment_fav" >
+        <action
+            android:id="@+id/action_navigation_fav_to_nav_fragment_character"
+            app:destination="@id/nav_fragment_character" />
+
+        </fragment>
     <fragment
     android:id="@+id/nav_fragment_character"
         android:name="Character.CharacterFragment"

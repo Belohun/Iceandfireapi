@@ -17,24 +17,24 @@ data class IceAndFireResponse(
     @SerializedName("Books")
     val books: List<Int>,
     @SerializedName("Born")
-    val born: String,
+    val born: String?="",
     @SerializedName("Children")
     val children: List<String>,
     @SerializedName("Culture")
-    val culture: String,
+    val culture: String?="",
     @SerializedName("Died")
-    val died: String,
+    val died: String?="",
     @SerializedName("Father")
-    val father: String,
+    val father: String?="",
     @SerializedName("Id")
+    @PrimaryKey(autoGenerate = false)
     val id: Int,
     @SerializedName("IsFemale")
     val isFemale: Boolean,
     @SerializedName("Mother")
-    val mother: String,
+    val mother: String?="",
     @SerializedName("Name")
-    @PrimaryKey(autoGenerate = false)
-    val name: String,
+    val name: String?="",
     @SerializedName("PlayedBy")
     @ColumnInfo(name = "played_by")
     val playedBy: List<String>,
@@ -42,7 +42,7 @@ data class IceAndFireResponse(
     @ColumnInfo(name = "pov_books")
     val povBooks: List<String>,
     @SerializedName("Spouse")
-    val spouse: String,
+    val spouse: String?="",
     @SerializedName("Titles")
     val titles: List<String>,
     @SerializedName("TvSeries")

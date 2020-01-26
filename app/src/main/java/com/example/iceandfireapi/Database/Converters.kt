@@ -24,7 +24,8 @@ class Converters {
 
     @TypeConverter
     fun stringToListOfInts(value: String): List<Int>? {
-        return value.split(",").map { it.toInt() }
+        if (value != "") return value.removeSurrounding("{", "}").split(", ").map { it.toInt() }
+        else return listOf(0)
     }
 
 }

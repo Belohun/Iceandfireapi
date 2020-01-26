@@ -7,6 +7,8 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import androidx.room.RoomDatabase
+import com.example.iceandfireapi.Database.DbCreator
 
 import com.example.shopapi.R
 
@@ -16,6 +18,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_main)
+
+        val db: RoomDatabase = DbCreator.CharactersDB.getInstance(applicationContext)
+
       /*  refreashdata(this)*/
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
 

@@ -33,6 +33,7 @@ class HomeFragment : Fragment(){
     private lateinit var homeViewModel: HomeViewModel
     private var navController: NavController?=null
     override fun onCreateView(
+
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
