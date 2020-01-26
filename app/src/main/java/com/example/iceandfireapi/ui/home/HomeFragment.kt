@@ -17,6 +17,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.iceandfireapi.data.network.IceAndFireApiService
+import com.example.iceandfireapi.data.network.response.IceAndFireResponse
 import com.example.iceandfireapi.data.network.response.ResponseAdapter
 import com.example.shopapi.R
 import kotlinx.android.synthetic.*
@@ -25,7 +26,9 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.io.IOException
 
+
 class HomeFragment : Fragment(){
+
 
     private lateinit var homeViewModel: HomeViewModel
     private var navController: NavController?=null
@@ -34,15 +37,12 @@ class HomeFragment : Fragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        fun refreash(){}
         val context: Context
         context = this.context!!
         var page: Int = 1
         var pageSize: Int = 10
         navController= Navigation.findNavController(container!!)
-
-
-
-
         homeViewModel =
             ViewModelProviders.of(this).get(HomeViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_home, container, false)
@@ -58,7 +58,7 @@ class HomeFragment : Fragment(){
         homeViewModel.button.observe(this, Observer {
            button.text=it
         })*/
-        GlobalScope.launch(Dispatchers.Main) {
+
             try {
 
                 val apiServive =
@@ -85,7 +85,7 @@ class HomeFragment : Fragment(){
                 /* d("Internet","Error while tring to reach api")*/
                 Toast.makeText(context, "Error while trying to get data", Toast.LENGTH_LONG).show()
             }
-        }
+
 
 
 
@@ -135,13 +135,14 @@ class HomeFragment : Fragment(){
             }
         }
         buttonRefreash.setOnClickListener{
-            GlobalScope.launch(Dispatchers.Main) {
+
                 try {
 
                     val apiServive =
                         IceAndFireApiService()
+                    var IceAndFireResponse: ArrayList<IceAndFireResponse>
                     GlobalScope.launch(Dispatchers.Main) {
-                        val IceAndFireResponse = apiServive.getCharacter(/*page.toString(),pageSize.toString()*/).await()
+                         IceAndFireResponse = apiServive.getCharacter(/*page.toString(),pageSize.toString()*/).await()
                         d("APIRESPONSE",IceAndFireResponse[1].toString())
 
                         if(IceAndFireResponse[0]== null){
@@ -154,15 +155,14 @@ class HomeFragment : Fragment(){
 
                     }
 
-                    /*fragment.recyclerView.layoutManager = LinearLayoutManager(application, RecyclerView.VERTICAL, false)
-                    val adapter = ResponseAdapter(application, IceAndFireResponse)
-                    fragment.recyclerView.adapter = adapter*/
+
 
                 } catch (e: IOException) {
-                    /* d("Internet","Error while tring to reach api")*/
+                     d("Internet","Error while tring to reach api")
                     Toast.makeText(context, "Error while trying to get data", Toast.LENGTH_LONG).show()
                 }
-            }
+
+
         }
 
 
