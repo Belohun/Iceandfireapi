@@ -10,6 +10,8 @@ import android.widget.Toast
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
+import com.example.iceandfireapi.Database.DbCreator
+import com.example.iceandfireapi.Database.delete
 import com.example.shopapi.R
 import kotlinx.android.synthetic.main.character.view.*
 import java.io.IOException
@@ -37,7 +39,7 @@ class FavAdapter(context: Context, var IceAndFireList: List<IceAndFireResponse>)
         try {
 
 
-            var charactes: IceAndFireResponse = IceAndFireList[position]
+            var charactes = IceAndFireList[position]
             if (charactes.name == "") {
                 holder.name.text = charactes.aliases[0]
                 /*          holder.name.text=charactes.aliases[0]*/
@@ -47,7 +49,11 @@ class FavAdapter(context: Context, var IceAndFireList: List<IceAndFireResponse>)
             /*holder.button.setBackgroundResource(R.drawable.ic_add_circle_white_24dp)*/
             holder.button.text = "Del"
             holder.button.setOnClickListener {
-                d("todo","Tutaj wstaw funkcję odpowiadającą za usuwanie z bazy")
+                delete(db = DbCreator.CharactersDB.getInstance(context), c = charactes)
+                //notifyDataSetChanged()
+                notifyItemRemoved(position)
+
+
             }
             holder.itemView.setOnClickListener {
 

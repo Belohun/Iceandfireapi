@@ -1,6 +1,7 @@
 package com.example.iceandfireapi.Database
 
 import android.util.Log
+import android.util.Log.d
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -11,14 +12,22 @@ import kotlinx.coroutines.*
 
 @Dao
 interface ICharacter {
+
     @Insert
     suspend fun ins(c: IceAndFireResponse)
+
     @Delete
     suspend fun del(c: IceAndFireResponse)
+
     @Query("Select * from favourite_characters")
     suspend fun getAllCharacters(): List<IceAndFireResponse>
+
     @Query("Select * from favourite_characters where name==:name")
     suspend fun getCharacterByName(name: String): IceAndFireResponse
+
+    @Query("Select * from favourite_characters where id==:id")
+    suspend fun getCharacterById(id: Int): IceAndFireResponse
+
     @Query("Select * from favourite_characters where played_by like '%' || :actor || '%'")
     suspend fun getCharacterByActor(actor: String): IceAndFireResponse
 
@@ -26,7 +35,7 @@ interface ICharacter {
 
 fun addChar(db: DbCreator.CharactersDB, c: IceAndFireResponse) { // Insert
     CoroutineScope(Dispatchers.IO).launch {
-        db.characterDao().ins(c)
+        if("${getById(db, c.id)}"=="null") db.characterDao().ins(c)
     }
 }
 
@@ -37,8 +46,9 @@ fun delete(db: DbCreator.CharactersDB, c:IceAndFireResponse) {
     }
 }
 
-suspend fun getAll(db: DbCreator.CharactersDB) = withContext(Dispatchers.IO) {
-    db.characterDao().getAllCharacters() as ArrayList<IceAndFireResponse>
+fun getById(db: DbCreator.CharactersDB, id: Int):IceAndFireResponse = runBlocking(Dispatchers.IO) {
+    val result = async {db.characterDao().getCharacterById(id)}.await()
+    return@runBlocking result
 }
 
 fun getChars(db: DbCreator.CharactersDB): ArrayList<IceAndFireResponse> = runBlocking(Dispatchers.Default) {
