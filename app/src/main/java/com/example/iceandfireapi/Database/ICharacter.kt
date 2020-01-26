@@ -69,6 +69,3 @@ fun getByActor(db:DbCreator.CharactersDB, a:String){
         with(Dispatchers.Main) {Log.d("got by actor:", "$c")}
     }
 }
-
-//TODO:
-//  podłączyć funkcje do recycler view
