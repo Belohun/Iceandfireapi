@@ -52,6 +52,7 @@ class FavAdapter(context: Context, var IceAndFireList: ArrayList<IceAndFireRespo
             holder.itemView.setOnClickListener {
 
                 d("todo", "Tutaj wstaw funkcję odpowiadającą za wyświetlanie postaci bazy")
+                navController!!.navigate(R.id.action_navigation_fav_to_nav_fragment_character)
 
 
 

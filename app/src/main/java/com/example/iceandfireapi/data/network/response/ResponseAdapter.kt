@@ -48,7 +48,7 @@ class ResponseAdapter(context: Context, var IceAndFireList: ArrayList<IceAndFire
             /*holder.button.setBackgroundResource(R.drawable.ic_add_circle_white_24dp)*/
             holder.button.text = "Add"
             holder.button.setOnClickListener {
-                TODO("Tutaj wstaw funkcję odpowiadającą za dodawanie do bazy")
+                d("TODO","Tutaj wstaw funkcję odpowiadającą za dodawanie do bazy")
             }
             holder.itemView.setOnClickListener {
 
