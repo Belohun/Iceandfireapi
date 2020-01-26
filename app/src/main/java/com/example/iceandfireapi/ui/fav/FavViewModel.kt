@@ -3,7 +3,6 @@ package com.example.iceandfireapi.ui.fav
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.iceandfireapi.Database.DbCreator
 
 class FavViewModel : ViewModel() {
 

@@ -9,7 +9,6 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.room.RoomDatabase
 import com.example.iceandfireapi.Database.DbCreator
-import com.example.iceandfireapi.Database.ICharacter
 
 import com.example.shopapi.R
 

@@ -45,6 +45,7 @@ class ResponseAdapter(context: Context, var IceAndFireList: ArrayList<IceAndFire
 
 
             var charactes: IceAndFireResponse = IceAndFireList[position+((pageSize)*(page-1))]
+
             if (charactes.name == "") {
                 holder.name.text = charactes.aliases[0]
                 /*          holder.name.text=charactes.aliases[0]*/
