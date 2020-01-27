@@ -13,7 +13,7 @@ import com.example.shopapi.R
 import com.example.shopapi.databinding.FragmentCharacterBinding
 
 class CharacterFragment:Fragment() {
-    private lateinit var characterViewModel:CharacterViewModel
+   // private lateinit var characterViewModel:CharacterViewModel
 /*    var name=""
     var alias=""
     var gender=""
@@ -27,8 +27,9 @@ class CharacterFragment:Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        characterViewModel = ViewModelProviders.of(this).get(CharacterViewModel::class.java)
+        val characterViewModel = ViewModelProviders.of(this).get(CharacterViewModel::class.java) // to będzie singleton tej aktywności
         val binding: FragmentCharacterBinding = DataBindingUtil.inflate(inflater,R.layout.fragment_character, container, false)
+
         binding.character=characterViewModel.character.value
         val root = binding.root
 /*        val name:TextView=root.findViewById(R.id.nameFragment_character)
