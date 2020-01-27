@@ -18,21 +18,6 @@ interface IceAndFireApiService {
 companion object{
      operator fun invoke(/*connectivityInterceptor: ConnectivityInterceptor*/): IceAndFireApiService {
 
-   /* if key needed*/
-         /*
-val requestInterceptor = Interceptor{chain ->
-
-             val url = chain.request()
-                 .url()
-                 .newBuilder()
-                *//* .addQueryParameter(name"key",API_KEY)*//*
-                 .build()
-             val request = chain.request()
-                 .newBuilder()
-                 .url(url)
-                 .build()
-             return@Interceptor chain.proceed(request)
-         }*/
          val okHttpClient= OkHttpClient.Builder()
              /*   .addInterceptor(requestInterceptor)*/
              /* .addInterceptor(connectivityInterceptor)*/
@@ -40,7 +25,7 @@ val requestInterceptor = Interceptor{chain ->
          return Retrofit.Builder()
              .client(okHttpClient)
              //.baseUrl("https://www.anapioficeandfire.com/api/")
-             .baseUrl("http://192.168.1.201:80/iceandfireapi/")
+             .baseUrl("http://10.42.0.1:80/iceandfireapi/")
 
              .addCallAdapterFactory(CoroutineCallAdapterFactory())
              .addConverterFactory(GsonConverterFactory.create())

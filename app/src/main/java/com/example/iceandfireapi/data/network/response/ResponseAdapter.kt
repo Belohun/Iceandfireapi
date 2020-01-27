@@ -66,7 +66,7 @@ class ResponseAdapter(context: Context, var IceAndFireList: ArrayList<IceAndFire
 
 
             }
-        }catch (e: IOException){
+        } catch (e: IOException) {
             holder.name.text="Error"
             d("Adapter","onBindViewHolder")
         }
