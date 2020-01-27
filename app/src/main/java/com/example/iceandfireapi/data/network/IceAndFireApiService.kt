@@ -25,7 +25,7 @@ companion object{
          return Retrofit.Builder()
              .client(okHttpClient)
              //.baseUrl("https://www.anapioficeandfire.com/api/")
-             .baseUrl("http://10.42.0.1:80/iceandfireapi/")
+             .baseUrl("http://10.10.16.83:69/iceandfireapi/")
 
              .addCallAdapterFactory(CoroutineCallAdapterFactory())
              .addConverterFactory(GsonConverterFactory.create())

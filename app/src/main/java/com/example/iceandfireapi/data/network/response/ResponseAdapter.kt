@@ -1,5 +1,7 @@
 package com.example.iceandfireapi.data.network.response
 
+import Character.CharacterFragment
+import Character.CharacterViewModel
 import android.app.Application
 import android.content.Context
 import android.content.Intent
@@ -8,6 +10,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
@@ -25,6 +29,10 @@ class ResponseAdapter(context: Context, var IceAndFireList: ArrayList<IceAndFire
   class ViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
     var name = itemView.name
     val button = itemView.btn_char
+
+      /* val viewModel = ViewModelProviders.of()*/
+       /*  ViewModelProviders.of(context).get(CharacterViewModel:class.java)
+*/
 
   }
 
@@ -60,8 +68,10 @@ class ResponseAdapter(context: Context, var IceAndFireList: ArrayList<IceAndFire
                 addChar(db, charactes)
             }
             holder.itemView.setOnClickListener {
+            //  val viewModel =CharacterViewModel()
+              /*  viewModel._character.value=
 
-
+*/
                 navController!!.navigate(R.id.action_navigation_home_to_nav_fragment_character)
 
 

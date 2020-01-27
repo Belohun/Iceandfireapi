@@ -34,7 +34,7 @@ data class IceAndFireResponse(
     @SerializedName("Mother")
     val mother: String?="",
     @SerializedName("Name")
-    val name: String?="",
+    var name: String?="",
     @SerializedName("PlayedBy")
     @ColumnInfo(name = "played_by")
     val playedBy: List<String>,

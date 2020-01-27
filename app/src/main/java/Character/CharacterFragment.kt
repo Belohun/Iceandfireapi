@@ -29,9 +29,8 @@ class CharacterFragment:Fragment() {
     ): View? {
         val characterViewModel = ViewModelProviders.of(this).get(CharacterViewModel::class.java) // to będzie singleton tej aktywności
         val binding: FragmentCharacterBinding = DataBindingUtil.inflate(inflater,R.layout.fragment_character, container, false)
-
-        binding.character=characterViewModel.character.value
         val root = binding.root
+
 /*        val name:TextView=root.findViewById(R.id.nameFragment_character)
         val alias: TextView = root.findViewById(R.id.aliasFragment_character)
 

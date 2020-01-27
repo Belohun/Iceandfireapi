@@ -42,7 +42,7 @@ class FavFragment : Fragment() {
         favViewModel =
             ViewModelProviders.of(this).get(FavViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_fav, container, false)
-        val recyclerView: RecyclerView = root.findViewById(R.id.recyclerView)
+        val recyclerView: RecyclerView = root.findViewById(R.id.recyclerView2)
 
 
                recyclerView.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)

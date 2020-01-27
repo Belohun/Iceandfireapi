@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_navigation_home_self"
             app:destination="@id/navigation_home" />
+        <argument
+            android:name="Id"
+            app:argType="integer" />
     </fragment>
 
     <fragment
