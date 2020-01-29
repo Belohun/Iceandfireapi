@@ -5,6 +5,7 @@ import androidx.room.*
 import com.google.gson.Gson
 import com.google.gson.annotations.SerializedName
 import com.google.gson.reflect.TypeToken
+import javax.inject.Singleton
 
 
 @Entity(tableName = "favourite_characters")
@@ -34,7 +35,7 @@ data class IceAndFireResponse(
     @SerializedName("Mother")
     val mother: String?="",
     @SerializedName("Name")
-    val name: String?="",
+    var name: String?="",
     @SerializedName("PlayedBy")
     @ColumnInfo(name = "played_by")
     val playedBy: List<String>,
