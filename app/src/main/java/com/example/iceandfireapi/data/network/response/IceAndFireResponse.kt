@@ -5,6 +5,7 @@ import androidx.room.*
 import com.google.gson.Gson
 import com.google.gson.annotations.SerializedName
 import com.google.gson.reflect.TypeToken
+import javax.inject.Singleton
 
 
 @Entity(tableName = "favourite_characters")

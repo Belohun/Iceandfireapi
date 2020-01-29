@@ -1,6 +1,7 @@
 package com.example.iceandfireapi.data.network
 
 import com.example.iceandfireapi.data.network.response.IceAndFireResponse
+import com.example.iceandfireapi.data.network.response.IceAndFireResponseList
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import retrofit2.http.GET
 import kotlinx.coroutines.Deferred
@@ -14,7 +15,7 @@ import retrofit2.http.Query
 interface IceAndFireApiService {
     @Headers("Accept: application/vnd.anapioficeandfire+json; version=1")
     @GET("characters.json")
-    fun getCharacter(/*@Query("page")page:String="1", @Query("pageSize")pageSize: String="20"*/):Deferred<ArrayList<IceAndFireResponse>>
+    fun getCharacter(/*@Query("page")page:String="1", @Query("pageSize")pageSize: String="20"*/):Deferred<IceAndFireResponseList>
 companion object{
      operator fun invoke(/*connectivityInterceptor: ConnectivityInterceptor*/): IceAndFireApiService {
 
@@ -25,7 +26,7 @@ companion object{
          return Retrofit.Builder()
              .client(okHttpClient)
              //.baseUrl("https://www.anapioficeandfire.com/api/")
-             .baseUrl("http://10.10.16.83:69/iceandfireapi/")
+             .baseUrl("http://192.168.55.104:69/iceandfireapi/")
 
              .addCallAdapterFactory(CoroutineCallAdapterFactory())
              .addConverterFactory(GsonConverterFactory.create())

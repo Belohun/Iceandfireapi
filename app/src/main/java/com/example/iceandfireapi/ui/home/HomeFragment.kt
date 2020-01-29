@@ -1,5 +1,7 @@
 package com.example.iceandfireapi.ui.home
 
+import Character.CharacterFragment
+import Character.CharacterViewModel
 import android.content.Context
 import android.os.Bundle
 import android.util.Log.d
@@ -17,9 +19,11 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.iceandfireapi.data.network.IceAndFireApiService
+import com.example.iceandfireapi.data.network.response.IceAndFireResponse
 import com.example.iceandfireapi.data.network.response.ResponseAdapter
 import com.example.shopapi.R
 import kotlinx.android.synthetic.*
+import kotlinx.android.synthetic.main.fragment_character.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -63,19 +67,17 @@ class HomeFragment : Fragment(){
 
                 val apiServive =
                     IceAndFireApiService()
-                GlobalScope.launch(Dispatchers.Main) {
-                    val IceAndFireResponse = apiServive.getCharacter(/*page.toString(),pageSize.toString()*/).await()
-                    d("APIRESPONSE",IceAndFireResponse[1].toString())
-
-                    if(IceAndFireResponse[0]== null){
+                    val iceAndFireResponse = apiServive.getCharacter(/*page.toString(),pageSize.toString()*/).await()
+                    d("APIRESPONSE",iceAndFireResponse[1].toString())
+                    if(iceAndFireResponse[0]== null){
                         Toast.makeText(context, "Error while trying to get data", Toast.LENGTH_LONG).show()
                     }else{
-                        recyclerView.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-                        val adapter = ResponseAdapter(context,IceAndFireResponse,page,pageSize )
-                        recyclerView.adapter = adapter
-                    }
 
-                }
+                        recyclerView.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+                        val adapter = ResponseAdapter(context,iceAndFireResponse,page,pageSize )
+                        recyclerView.adapter = adapter
+
+                    }
 
                 /*fragment.recyclerView.layoutManager = LinearLayoutManager(application, RecyclerView.VERTICAL, false)
                 val adapter = ResponseAdapter(application, IceAndFireResponse)
@@ -86,10 +88,6 @@ class HomeFragment : Fragment(){
                 Toast.makeText(context, "Error while trying to get data", Toast.LENGTH_LONG).show()
             }
         }
-
-
-
-
 
         val spinnerPage: Spinner = root.findViewById(R.id.page)
         val adapterPage :ArrayAdapter<CharSequence> = ArrayAdapter.createFromResource(context,R.array.page,android.R.layout.simple_spinner_item)
@@ -135,7 +133,6 @@ class HomeFragment : Fragment(){
             }
         }
         buttonRefreash.setOnClickListener{
-            GlobalScope.launch(Dispatchers.Main) {
                 try {
 
                     val apiServive =
@@ -159,11 +156,11 @@ class HomeFragment : Fragment(){
                     fragment.recyclerView.adapter = adapter*/
 
                 } catch (e: IOException) {
-                    /* d("Internet","Error while tring to reach api")*/
-                    Toast.makeText(context, "Error while trying to get data", Toast.LENGTH_LONG).show()
+                     d("Internet","Error while tring to reach api")
+                   // Toast.makeText(context, "Error while trying to get data", Toast.LENGTH_LONG).show()
                 }
             }
-        }
+
 
 
 

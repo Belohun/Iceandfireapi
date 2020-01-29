@@ -19,9 +19,8 @@
         <action
             android:id="@+id/action_navigation_home_self"
             app:destination="@id/navigation_home" />
-        <argument
-            android:name="Id"
-            app:argType="integer" />
+
+
     </fragment>
 
     <fragment
@@ -39,7 +38,14 @@
         android:name="Character.CharacterFragment"
         tools:layout="@layout/fragment_character"
 
-        />
+        >
+        <argument
+            android:name="Id"
+            app:argType="integer" />
+        <argument
+            android:name="Iddb"
+            app:argType="integer" />
+    </fragment>
 
 
 

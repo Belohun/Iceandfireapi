@@ -10,6 +10,8 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.example.iceandfireapi.Database.DbCreator
 import com.example.iceandfireapi.Database.delete
+import com.example.iceandfireapi.ui.fav.FavFragmentDirections
+import com.example.iceandfireapi.ui.home.HomeFragmentDirections
 import com.example.shopapi.R
 import kotlinx.android.synthetic.main.character.view.*
 import java.io.IOException
@@ -56,8 +58,8 @@ class FavAdapter(context: Context, var IceAndFireList: ArrayList<IceAndFireRespo
             }
             holder.itemView.setOnClickListener {
 
-                d("todo", "Tutaj wstaw funkcję odpowiadającą za wyświetlanie postaci bazy")
-                navController!!.navigate(R.id.action_navigation_fav_to_nav_fragment_character)
+                val action = FavFragmentDirections.actionNavigationFavToNavFragmentCharacter(0,position)
+                navController!!.navigate(action)
 
 
 

@@ -1,26 +1,42 @@
 package Character
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.databinding.DataBindingUtil
+import android.widget.Toast
+
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.iceandfireapi.Database.DbCreator
+import com.example.iceandfireapi.Database.addChar
+import com.example.iceandfireapi.Database.delete
+import com.example.iceandfireapi.Database.getChars
+import com.example.iceandfireapi.data.network.IceAndFireApiService
+import com.example.iceandfireapi.data.network.response.IceAndFireResponse
+import com.example.iceandfireapi.data.network.response.IceAndFireResponseList
+import com.example.iceandfireapi.data.network.response.ResponseAdapter
+import com.example.iceandfireapi.ui.home.HomeFragment
 import com.example.shopapi.R
-import com.example.shopapi.databinding.FragmentCharacterBinding
+
+import kotlinx.android.synthetic.main.character.*
+import kotlinx.android.synthetic.main.character.view.*
+import kotlinx.android.synthetic.main.fragment_character.view.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import java.io.IOException
+import java.text.FieldPosition
 
 class CharacterFragment:Fragment() {
-   // private lateinit var characterViewModel:CharacterViewModel
-/*    var name=""
-    var alias=""
-    var gender=""
-    var born=""
-    var died=""
-    var father=""
-    var mother=""*/
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,23 +44,115 @@ class CharacterFragment:Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val characterViewModel = ViewModelProviders.of(this).get(CharacterViewModel::class.java) // to będzie singleton tej aktywności
-        val binding: FragmentCharacterBinding = DataBindingUtil.inflate(inflater,R.layout.fragment_character, container, false)
-        val root = binding.root
+        val root = inflater.inflate(R.layout.fragment_character, container, false)
+        GlobalScope.launch(Dispatchers.Main) {
 
-/*        val name:TextView=root.findViewById(R.id.nameFragment_character)
-        val alias: TextView = root.findViewById(R.id.aliasFragment_character)
+            arguments?.let {
+                val args = CharacterFragmentArgs.fromBundle(it)
+                val position = args.id
+                val positiondb = args.iddb
+                if (positiondb == 9999) {
+                    val apiServive =
+                        IceAndFireApiService()
+                    val iceAndFireResponse =
+                        apiServive.getCharacter().await()
+                    val list = iceAndFireResponse[position]
+                    if (list.name == "") {
+                        root.TitleFragment_character.text = list.aliases[0]
 
-    characterViewModel.character.observe(this, Observer {
-        name.text=it.name
-        alias.text=it.aliases[0]
+                    } else {
+                        root.TitleFragment_character.text = list.name
+                    }
+                    root.nameFragment_character.text = list.name
+                    root.aliasFragment_character.text = list.aliases[0]
+                    root.fatherFragment_character.text = list.father
+                    root.btnFragment_character.text = "ADD"
+                    root.btnFragment_character.setOnClickListener {
+                        val db =
+                            DbCreator.CharactersDB.getInstance(this@CharacterFragment.context!!)
+                        addChar(db, list)
+                        fragmentManager?.popBackStack()
+                    }
+                    if (list.isFemale) {
+                        root.genderFragment_character.text = "female"
+                    } else {
+                        root.genderFragment_character.text = "male"
+                    }
+                    root.bornFragment_character.text = list.born
+                    root.diedFragment_character.text = list.died
+                    root.motherFragment_character.text = list.mother
 
-    })*/
+                }else
+                {
+                    val db = DbCreator.CharactersDB.getInstance(this@CharacterFragment.context!!)
+                   val iceAndFireResponse= getChars(db)
+                    val list = iceAndFireResponse[positiondb]
+                    if (list.name == "") {
+                        root.TitleFragment_character.text = list.aliases[0]
+
+                    } else {
+                        root.TitleFragment_character.text = list.name
+                    }
+                    root.nameFragment_character.text = list.name
+                    root.aliasFragment_character.text = list.aliases[0]
+                    root.fatherFragment_character.text = list.father
+                    root.btnFragment_character.text = "DEL"
+                    root.btnFragment_character.setOnClickListener {
+
+                        delete(db = DbCreator.CharactersDB.getInstance(this@CharacterFragment.context!!), c = list)
+                        fragmentManager?.popBackStack()
+                    }
+                    if (list.isFemale) {
+                        root.genderFragment_character.text = "female"
+                    } else {
+                        root.genderFragment_character.text = "male"
+                    }
+                    root.bornFragment_character.text = list.born
+                    root.diedFragment_character.text = list.died
+                    root.motherFragment_character.text = list.mother
 
 
+
+
+                }
+            }
+               /* val apiServive =
+                    IceAndFireApiService()
+                val iceAndFireResponse =
+                    apiServive.getCharacter().await()
+            val list = iceAndFireResponse[position]
+                if(list.name==""){
+                    root.TitleFragment_character.text=list.aliases[0]
+
+                }else{
+                    root.TitleFragment_character.text=list.name
+                }
+                root.nameFragment_character.text=list.name
+                root.aliasFragment_character.text=list.aliases[0]
+                root.fatherFragment_character.text=list.father
+                root.btnFragment_character.text="ADD"
+            if(list.isFemale){
+                root.genderFragment_character.text="female"}
+            else{
+                root.genderFragment_character.text="male"
+            }
+            root.bornFragment_character.text=list.born
+            root.diedFragment_character.text=list.died
+            root.motherFragment_character.text=list.mother*/
+
+              //  Log.d("CHARACTERFRAGMEN", "coś" + iceAndFireResponse[1].toString())
+
+
+
+
+
+
+
+
+        }
 
         return root
     }
-
 
 
 
