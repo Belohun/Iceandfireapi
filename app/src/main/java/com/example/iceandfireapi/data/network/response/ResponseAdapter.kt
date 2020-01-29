@@ -65,7 +65,7 @@ import java.io.IOException
 
             }
             holder.itemView.setOnClickListener {
-                val action = HomeFragmentDirections.actionNavigationHomeToNavFragmentCharacter(position,9999)
+                val action = HomeFragmentDirections.actionNavigationHomeToNavFragmentCharacter((position+((pageSize)*(page-1))),9999)
                 navController!!.navigate(action)
 
 
