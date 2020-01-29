@@ -3,6 +3,7 @@ package Character
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
+import android.util.Log.d
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -54,18 +55,23 @@ class CharacterFragment:Fragment() {
                 if (positiondb == 9999) {
                     val apiServive =
                         IceAndFireApiService()
-                    val iceAndFireResponse =
-                        apiServive.getCharacter().await()
+                    val iceAndFireResponse:IceAndFireResponseList = apiServive.getCharacter().await()
+                    d("INT",position.toString())
                     val list = iceAndFireResponse[position]
-                    if (list.name == "") {
-                        root.TitleFragment_character.text = list.aliases[0]
+                    d("rozmiar",iceAndFireResponse.size.toString())
+                    if (iceAndFireResponse[position].name == "") {
+                        root.TitleFragment_character.text = iceAndFireResponse[position].aliases[0]
 
                     } else {
-                        root.TitleFragment_character.text = list.name
+                        root.TitleFragment_character.text = iceAndFireResponse[position].name
                     }
-                    root.nameFragment_character.text = list.name
-                    root.aliasFragment_character.text = list.aliases[0]
-                    root.fatherFragment_character.text = list.father
+                    root.nameFragment_character.text = iceAndFireResponse[position].name
+                    if(iceAndFireResponse[position].aliases.toString()=="[]"){
+                    root.aliasFragment_character.text = ""
+                    }else{
+                        root.aliasFragment_character.text = iceAndFireResponse[position].aliases[0]
+                    }
+                    root.fatherFragment_character.text = iceAndFireResponse[position].father
                     root.btnFragment_character.text = "ADD"
                     root.btnFragment_character.setOnClickListener {
                         val db =
@@ -73,14 +79,14 @@ class CharacterFragment:Fragment() {
                         addChar(db, list)
                         fragmentManager?.popBackStack()
                     }
-                    if (list.isFemale) {
+                    if (iceAndFireResponse[position].isFemale) {
                         root.genderFragment_character.text = "female"
                     } else {
                         root.genderFragment_character.text = "male"
                     }
-                    root.bornFragment_character.text = list.born
-                    root.diedFragment_character.text = list.died
-                    root.motherFragment_character.text = list.mother
+                    root.bornFragment_character.text = iceAndFireResponse[position].born
+                    root.diedFragment_character.text = iceAndFireResponse[position].died
+                    root.motherFragment_character.text = iceAndFireResponse[position].mother
 
                 }else
                 {

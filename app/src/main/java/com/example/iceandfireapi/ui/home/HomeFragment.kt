@@ -71,6 +71,7 @@ class HomeFragment : Fragment(){
                     d("APIRESPONSE",iceAndFireResponse[1].toString())
                     if(iceAndFireResponse[0]== null){
                         Toast.makeText(context, "Error while trying to get data", Toast.LENGTH_LONG).show()
+
                     }else{
 
                         recyclerView.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)

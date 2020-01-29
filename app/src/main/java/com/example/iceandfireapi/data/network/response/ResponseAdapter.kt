@@ -50,6 +50,7 @@ import java.io.IOException
 
             var charactes: IceAndFireResponse = IceAndFireList[position+((pageSize)*(page-1))]
 
+
             if (charactes.name == "") {
                 holder.name.text = charactes.aliases[0]
                 /*          holder.name.text=charactes.aliases[0]*/
@@ -67,6 +68,7 @@ import java.io.IOException
             holder.itemView.setOnClickListener {
                 val action = HomeFragmentDirections.actionNavigationHomeToNavFragmentCharacter((position+((pageSize)*(page-1))),9999)
                 navController!!.navigate(action)
+
 
 
             }
